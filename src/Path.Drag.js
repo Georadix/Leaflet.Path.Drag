@@ -116,10 +116,11 @@ L.Handler.PathDrag = L.Handler.extend( /** @lends  L.Path.Drag.prototype */ {
           .off('mousemove', this._onDrag, this)
           .off('mouseup', this._onDragEnd, this);
 
-        // consistency
-        this._path.fire('dragend', {
-            latLng: evt.latlng
-        });
+        if(this.moved()){
+            this._path.fire('dragend', {
+                latLng: evt.latlng
+            });
+        }
 
         if (this._path._popup) {
             L.Util.requestAnimFrame(function () {
